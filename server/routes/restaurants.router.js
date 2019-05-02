@@ -31,4 +31,20 @@ router.post('/', (req,res) => {
         });
 });
 
+
+router.delete('/delete/:id', (req,res) => {
+    console.log(req.params.id)
+
+    const queryString = `DELETE FROM "restaurants" WHERE id='$1';`;
+
+    pool.query(queryString, [req.params.id])
+    .then((response) => {
+        console.log(response)
+    })
+
+    .catch((err) => {
+        console.log('Error deleting: ', err);
+    });
+}
+
 module.exports = router;
